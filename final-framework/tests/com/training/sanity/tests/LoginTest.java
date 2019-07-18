@@ -4,11 +4,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import com.training.generics.ScreenShot;
 import com.training.pom.LoginPOM;
@@ -32,16 +33,16 @@ public class LoginTest {
 		properties.load(inStream);
 	}
 
-	@Before
+	@BeforeMethod
 	public void setUp() throws Exception {
-		driver = DriverFactory.getDriver(DriverNames.CHROME);
+		driver = DriverFactory.getDriver(DriverNames.FIREFOX);
 		loginPOM = new LoginPOM(driver); 
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		driver.get(baseUrl);
 	}
 
-	@After
+	@AfterMethod
 	public void tearDown() throws Exception {
 		Thread.sleep(5000);
 		driver.quit();
@@ -49,10 +50,11 @@ public class LoginTest {
 	
 	@Test
 	public void loginPassTest() {
-			loginPOM.sendUserName("admin");
-			loginPOM.sendPassword("admin@123");
-			loginPOM.clickLoginBtn(); 
-			screenShot.captureScreenShot("First");
+		loginPOM.sendUserName("admin");
+		loginPOM.sendPassword("admin@123");
+		loginPOM.clickLoginBtn(); 
+		screenShot.captureScreenShot("First");
+		
 	}
 	
 	
