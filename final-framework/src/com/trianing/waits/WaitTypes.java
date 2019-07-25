@@ -30,14 +30,14 @@ public class WaitTypes {
 	// this method will return WebElement 
 	// when on the page it is available for presence
 	// presenceOfElementLocated
-	public WebElement presenceElementLocated(By locator, int timeout){
+	public WebElement presenceElementLocated(WebElement element, int timeout){
 		try{
 			WebDriverWait wait = new WebDriverWait(driver, timeout);
-			WebElement element  = wait.until(
-					ExpectedConditions.presenceOfElementLocated(locator)
+			WebElement webelement  = wait.until(
+					ExpectedConditions.presenceOfElementLocated((By) element)
 					);
 			System.out.println("Element Located");
-			return element;
+			return webelement;
 		}catch(Exception e ){
 			System.out.println("Element Not Located " + e);
 		}
@@ -62,11 +62,11 @@ public class WaitTypes {
 	
 	
 	
-	public WebElement waitForElement(By locator, int timeout){
+	public WebElement waitForElement(WebElement webElement, int timeout){
 		try{
 			WebDriverWait wait = new WebDriverWait(driver, timeout);
 			WebElement element  = wait.until(
-					ExpectedConditions.visibilityOfElementLocated(locator)
+					ExpectedConditions.visibilityOfElementLocated((By) webElement)
 					);
 			System.out.println("Element Located");
 			
