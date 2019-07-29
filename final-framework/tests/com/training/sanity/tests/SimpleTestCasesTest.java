@@ -21,6 +21,8 @@ public class SimpleTestCasesTest {
 	private HomePagePOM homePagePOM; 
 	private static Properties properties; 
 	private ScreenShot screenShot;
+	private String userID;
+	private String userPass;
 	ApplicationGenericMethods applicationGenericMethods;
 	DashboardPOM dashboardPOM;
 	@BeforeClass
@@ -34,6 +36,8 @@ public class SimpleTestCasesTest {
 		driver = DriverFactory.getDriver(DriverNames.FIREFOX);
 		homePagePOM = new HomePagePOM(driver); 
 		baseUrl = properties.getProperty("baseURL");
+		userID=properties.getProperty("UserID");
+		userPass=properties.getProperty("password");
 		screenShot = new ScreenShot(driver); 
 		driver.get(baseUrl);
 	}
@@ -47,13 +51,13 @@ public class SimpleTestCasesTest {
 	@Test(priority=1)
 	public void RETC_010()  {
 		try {
-			homePagePOM.mouseOverNewLaunchBtn();
-			homePagePOM.clickDonecQuisImg();
-			homePagePOM.sendYourName("Mohammed Zubair");
-			homePagePOM.sendYourEmail("mzubair0@in.ibm.com");
-			homePagePOM.sendYourSubject("Test");
-			homePagePOM.sendYourMessage("To live a creative life, we must lose our fear of being wrong");
-			homePagePOM.clickSubmit();
+			homePagePOM.mouseOverNewLaunchBtn();  //Mouse Over New Launch Link
+			homePagePOM.clickDonecQuisImg();      //Click on Donec quis image
+			homePagePOM.sendYourName("Mohammed Zubair");   //Send Name
+			homePagePOM.sendYourEmail("mzubair0@in.ibm.com");//Send Email ID
+			homePagePOM.sendYourSubject("Test");  //Send Subject
+			homePagePOM.sendYourMessage("To live a creative life, we must lose our fear of being wrong");//Send Message
+			homePagePOM.clickSubmit();  //Click on send button 
 			try {
 				Assert.assertEquals(homePagePOM.getmessagePostSubmit(), "Thank you for your message. It has been sent", "Message Sent ERROR");
 			}catch(java.lang.AssertionError e) 
@@ -67,8 +71,8 @@ public class SimpleTestCasesTest {
 	public void RETC_011() 
 	{try {
 		ApplicationGenericMethods applicationGenericMethods= new ApplicationGenericMethods(driver);
-		applicationGenericMethods.adminLogin();
-		Assert.assertEquals(dashboardPOM.CheckDashboard().isDisplayed(), true,"Something went Wrong");
+		applicationGenericMethods.adminLogin(userID,userPass);  //To login to the application
+		Assert.assertEquals(dashboardPOM.CheckDashboard().isDisplayed(), true,"Something went Wrong"); //Validate successful Login
 	} catch(Exception e)
 	{e.printStackTrace();
 	}
@@ -79,10 +83,10 @@ public class SimpleTestCasesTest {
 	public void RETC_012()
 	{
 		try {
-			homePagePOM.clickLoginRegisterLink();
-			homePagePOM.clickLostYourPassword();
-			homePagePOM.sendLostpswdUserEmail();
-			homePagePOM.clickResetPassword();
+			homePagePOM.clickLoginRegisterLink();   //Click on lOGIN/Register Link
+			homePagePOM.clickLostYourPassword();    //CLick on Lost your Password Link
+			homePagePOM.sendLostpswdUserEmail();    //Send Email ID
+			homePagePOM.clickResetPassword();       //Click on reset password button
 			System.out.println(homePagePOM.getResetPasswordMessage());
 		}catch(Exception e)
 		{e.printStackTrace();

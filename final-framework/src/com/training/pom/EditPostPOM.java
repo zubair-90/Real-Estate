@@ -6,26 +6,23 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.training.generics.GenericMethods;
+import com.trianing.waits.WaitTypes;
 
-public class DashboardPOM {
+public class EditPostPOM {
 
 	private WebDriver driver; 
 	private GenericMethods genericMethods ;
-	public DashboardPOM(WebDriver driver) {
+	public EditPostPOM(WebDriver driver) {
 		this.driver = driver; 
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath="//h1[text()='Dashboard']")
-	private WebElement dashboard;
+	@FindBy(xpath="//a[text()='View post']")
+	private WebElement viewpost;
 
-	public WebElement CheckDashboard() {return dashboard;
-	}
-	
-	@FindBy(xpath="//div[text()='Posts']")
-	private WebElement post;
-	
-	public void clickPostLink() {
-		this.post.click(); 
+	public void clickViewPostbtn() {
+		WaitTypes waitTypes= new WaitTypes(driver);
+		waitTypes.presenceElementLocated(viewpost, 60);
+		this.viewpost.click(); 
 	}
 }
