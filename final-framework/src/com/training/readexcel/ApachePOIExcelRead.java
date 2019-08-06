@@ -71,7 +71,7 @@ public class ApachePOIExcelRead {
 		String fileName = "C:/Users/MohammedZubairMohamm/Desktop/Testing.xlsx";
 
 		for (List<Object> temp : getExcelContent(fileName)) {
-			System.out.println(temp.get(0) + ", " + temp.get(1));
+			System.out.println(temp.get(0) + ", " + temp.get(1)+", " + temp.get(2)+", " + temp.get(3));
 		}
 	}
 }

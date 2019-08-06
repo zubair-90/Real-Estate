@@ -93,4 +93,11 @@ public class GenericMethods {
 	{
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 	}
+	
+	public void highlightElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        //use executeScript() method and pass the arguments 
+        //Here i pass values based on css style. Yellow background color with solid red color border. 
+        js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+    }
 }

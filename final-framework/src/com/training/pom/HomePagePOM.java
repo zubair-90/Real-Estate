@@ -31,6 +31,13 @@ public class HomePagePOM {
 	public void clickDonecQuisImg() {
 		this.donecQuisImg.click(); 
 	}
+	
+	@FindBy(xpath="//div[@id=\"wpmm-megamenu\"]/div/div[2]/div[2]/a")
+	private WebElement prestigeImg;
+	public void clickprestigeImg() {
+		this.prestigeImg.click(); 
+	}
+	
 	@FindBy(name="your-name")
 	private WebElement yourNameEdt;
 
@@ -38,12 +45,52 @@ public class HomePagePOM {
 		this.yourNameEdt.clear(); 
 		this.yourNameEdt.sendKeys(name); 
 	}
+	
+	@FindBy(name="your-name")
+	private WebElement errorInyourName;
+
+	public boolean verifyErrorInyourName() throws InterruptedException {
+		//Please note , Used Thread.sleep as element is already present on the webpage its just taking few seconds to refresh
+	    Thread.sleep(2000L);
+		String error = this.errorInyourName.getAttribute("aria-invalid");
+		
+		if(error.equalsIgnoreCase("true"))
+			{
+				return true;
+			}
+		else
+			{return false;
+			}
+	}
+	
+	@FindBy(name="your-name")
+	private WebElement yourName;
+
+	public void clickInyourName() {
+	
+		this.yourName.click();
+	}
+	
+	
 	@FindBy(name="your-email")
 	private WebElement yourEmailEdt;
 
 	public void sendYourEmail(String email) {
 		this.yourEmailEdt.clear(); 
 		this.yourEmailEdt.sendKeys(email); 
+	}
+	
+	@FindBy(name="your-email")
+	private WebElement errorInyourEmail;
+
+	public boolean verifyErrorInyourEmail() throws InterruptedException {
+		//Please note , Used Thread.sleep as element is already present on the webpage its just taking few seconds to refresh
+	    Thread.sleep(2000L);
+		String error=this.errorInyourEmail.getAttribute("aria-invalid");
+		if(error.equalsIgnoreCase("true"))
+			return true;
+		else
+			return false;
 	}
 	@FindBy(name="your-subject")
 	private WebElement yourSubjectEdt;
@@ -67,7 +114,8 @@ public class HomePagePOM {
 		this.submit.click();
 	}
 
-	@FindBy(xpath="//form[@class='wpcf7-form failed']//div[@role='alert']")
+	//@FindBy(xpath="//form[@class='wpcf7-form failed']//div[@role='alert']")
+	@FindBy(xpath="//div[@id=\"wpcf7-f4-o1\"]/form/div[2]")
 	private WebElement messagePostSubmit;
 	public WebElement getmessagePostSubmit()
 	{
@@ -136,4 +184,6 @@ public class HomePagePOM {
 		this.postDetails.isDisplayed();
 		return true  ;
 	}
+	
+
 }

@@ -13,6 +13,7 @@ import org.testng.Assert;
 import com.training.pom.CategoriesPOM;
 import com.training.pom.HomePagePOM;
 import com.training.pom.PostPOM;
+import com.training.pom.PropertiesPOM;
 import com.training.sanity.tests.SimpleTestCasesTest;
 
 public class ApplicationGenericMethods {
@@ -21,6 +22,7 @@ public class ApplicationGenericMethods {
 	private PostPOM postPOM;
 	CategoriesPOM categoriesPOM;
 	private SimpleTestCasesTest simpleTestCasesTest;
+	private PropertiesPOM propertiesPOM;
 
 	public ApplicationGenericMethods(WebDriver driver){
 		this.driver = driver;
@@ -74,6 +76,29 @@ public class ApplicationGenericMethods {
 	        String NewLauncWindow=i1.next();
 	        String RealStateHomeScreen=i1.next();
 	        driver.switchTo().window(RealStateHomeScreen);
+	        
+	}
+	
+	public void checkDisplayedPropertiesLinks()
+	{
+		PropertiesPOM propertiesPOM= new PropertiesPOM(driver);
+		boolean checkAllPropertiesLink=propertiesPOM.verifyAllPropertiesLink().isDisplayed();
+		String allPropertiesLink=propertiesPOM.verifyAllPropertiesLink().getText();
+		boolean checkAddNewLink=propertiesPOM.verifyAddNewLink().isDisplayed();
+		String  addNewLink=propertiesPOM.verifyAddNewLink().getText();
+		boolean checkFeaturesLink=propertiesPOM.verifyFeaturesLink().isDisplayed();
+		String featuresLink=propertiesPOM.verifyFeaturesLink().getText();
+		boolean checkRegionsLink=propertiesPOM.verifyregionsLink().isDisplayed();
+		String tagRegionsLinksLink=propertiesPOM.verifyregionsLink().getText();
+		boolean checkPropertiesSettingLink=propertiesPOM.verifypropertiesSettingLink().isDisplayed();
+		String propertiesSettingLink=propertiesPOM.verifypropertiesSettingLink().getText();
+		Assert.assertEquals(checkAllPropertiesLink, true); 
+		Assert.assertEquals(checkAddNewLink, true); 
+		Assert.assertEquals(checkFeaturesLink, true); 
+		Assert.assertEquals(checkRegionsLink, true); 
+		Assert.assertEquals(checkPropertiesSettingLink, true);
+        System.out.println("Expected Links are displaying successfully post click on Properties link. Displayed Links are.." );
+        System.out.println(allPropertiesLink +"\n" +addNewLink +"\n" +featuresLink  + "\n" +tagRegionsLinksLink + "\n" +propertiesSettingLink);
 	}
 		
 }
